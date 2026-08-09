@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sedekah Sampah Eco Masjid</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #196136; /* Warna Hijau Gelap */
+            --secondary: #8bc34a; /* Warna Hijau Terang */
+            --bg-color: #f7f5ee; /* Warna Krem/Beige */
+            --text-dark: #2d3748;
+            --text-light: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Pattern Background Islami yang transparan */
+        .bg-pattern {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l15 15-15 15L15 15 30 0zm0 30l15 15-15 15-15-15 15-15z' fill='%23196136' fill-rule='evenodd'/%3E%3C/svg%3E");
+            z-index: -2;
+        }
+
+        /* Siluet Masjid di bagian bawah */
+        .mosque-bg {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 35vh;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23cbd5e1' fill-opacity='0.4' d='M0,256L48,229.3C96,203,192,149,288,154.7C384,160,480,224,576,218.7C672,213,768,139,864,128C960,117,1056,171,1152,197.3C1248,224,1344,224,1392,224L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3Cpath fill='%2394a3b8' fill-opacity='0.3' d='M0,128L60,149.3C120,171,240,213,360,208C480,203,600,149,720,144C840,139,960,181,1080,202.7C1200,224,1320,224,1380,224L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: bottom;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.1;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .tagline {
+            background-color: var(--primary);
+            color: var(--text-light);
+            display: inline-block;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .eco-masjid {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #558b2f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Action Cards - Grid untuk dua tombol utama */
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* CARD BISA DIKLIK KESELURUHAN */
+        .card {
+            text-decoration: none;
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        /* Card 1: Web Sedekah Sampah (Warna Hijau) */
+        .card-web {
+            background-color: var(--primary);
+            color: var(--text-light);
+            border: 2px solid var(--primary);
+        }
+
+        .card-web .icon svg {
+            fill: var(--text-light);
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+
+        /* Card 2: Video Tutorial (Warna Krem/Putih dengan stroke hijau) */
+        .card-video {
+            background-color: #fffdf7; 
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .card-video .icon svg {
+            fill: var(--primary);
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .card p {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        .card-video p {
+            color: #4a5568;
+        }
+
+        /* Tombol di dalam card (Hanya hiasan UX agar tahu bisa diklik) */
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            width: 80%;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-web .btn {
+            background-color: var(--text-light);
+            color: var(--primary);
+        }
+        .card-web:hover .btn {
+            background-color: #e2e8f0;
+            transform: scale(1.05);
+        }
+
+        .card-video .btn {
+            background-color: var(--primary);
+            color: var(--text-light);
+        }
+        .card-video:hover .btn {
+            background-color: #124626;
+            transform: scale(1.05);
+        }
+
+        /* Pengganti QR Code: Info Section */
+        .info-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border-left: 8px solid var(--secondary);
+        }
+
+        .reminder {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+        .reminder strong {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .waste-types {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .waste-badge {
+            background: #f1f5f9;
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            color: var(--primary);
+            border: 1px solid #cbd5e1;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .action-grid { grid-template-columns: 1fr; }
+            .tagline { font-size: 0.8rem; padding: 6px 15px; }
+            .eco-masjid { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    <div class="mosque-bg"></div>
+
+    <div class="container">
+        <header>
+            <h1>SEDEKAH<br>SAMPAH</h1>
+            <div class="tagline">Untuk Masjid • Untuk Bumi • Untuk Kita Semua</div>
+            <div class="eco-masjid">
+                ECO 
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="#558b2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                </svg>
+                MASJID
+            </div>
+        </header>
+
+        <!-- KOTAK MENU BISA DIKLIK -->
+        <main class="action-grid">
+            
+            <!-- Card 1: Ke Web -->
+            <a href="https://sedekah-sampah.uingusdur.ac.id/beranda" class="card card-web" target="_blank" rel="noopener noreferrer">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.5C7.02944 21.5 3 17.4706 3 12.5C3 7.52944 7.02944 3.5 12 3.5C16.9706 3.5 21 7.52944 21 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+                        <path d="M12 8L12 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+                        <circle cx="12" cy="18" r="1.5" fill="currentColor"/>
+                        <path d="M7 11L12 6L17 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+                    </svg>
+                </div>
+                <h3>WEB SEDEKAH SAMPAH</h3>
+                <p>Akses platform utama untuk manajemen dan penyetoran sedekah sampah Anda.</p>
+                <div class="btn">Buka Web</div>
+            </a>
+
+            <!-- Card 2: Ke Video -->
+            <a href="https://drive.google.com/file/d/1neARz0i3px3iQlhRsioIQWjSbsFnS4Nu/view?usp=sharing" class="card card-video" target="_blank" rel="noopener noreferrer">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <h3>VIDEO TUTORIAL PENGGUNAAN</h3>
+                <p>Tonton panduan langkah demi langkah cara menggunakan sistem web kami.</p>
+                <div class="btn">Tonton Video</div>
+            </a>
+
+        </main>
+
+        <!-- BAGIAN INFO (PENGGANTI QR CODE) -->
+        <section class="info-section">
+            <div class="reminder">
+                <strong>INGAT!</strong> 
+                <span>Pastikan sampah dalam keadaan <b>bersih, kering, dan terpilah</b> sebelum disedekahkan.</span>
+            </div>
+            <div class="waste-types">
+                <div class="waste-badge">🍾 Botol Plastik</div>
+                <div class="waste-badge">📦 Kertas Kardus</div>
+                <div class="waste-badge">🥫 Kaleng Logam</div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
