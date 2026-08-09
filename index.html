@@ -8,7 +8,9 @@
     <style>
         :root {
             --primary: #196136;
+            --primary-dark: #0d381e;
             --secondary: #8bc34a;
+            --accent-gold: #d4af37;
             --bg-color: #f7f5ee;
             --text-dark: #2d3748;
             --text-light: #ffffff;
@@ -31,7 +33,7 @@
             overflow-x: hidden;
         }
 
-        /* --- ANIMASI PEMBUKA SPEKTAKULER (DURASI 7 DETIK) --- */
+        /* --- SPLASH SCREEN SPEKTAKULER (7 DETIK) --- */
         #splash-screen {
             position: fixed;
             top: 0;
@@ -50,6 +52,16 @@
             transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        .splash-logo-container {
+            position: relative;
+            width: 170px;
+            height: 170px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .splash-logo {
             width: 155px;
             height: 155px;
@@ -60,12 +72,26 @@
             box-shadow: 0 0 60px rgba(139, 195, 74, 0.8);
             border: 4px solid var(--secondary);
             animation: scalePulse 3s infinite ease-in-out;
-            margin-bottom: 25px;
+            z-index: 2;
+        }
+
+        .splash-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px dashed var(--accent-gold);
+            border-radius: 50%;
+            animation: rotateRing 12s linear infinite;
+        }
+
+        @keyframes rotateRing {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .splash-title {
             font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2.6rem;
             font-weight: 800;
             letter-spacing: 1.5px;
             margin-bottom: 10px;
@@ -74,7 +100,7 @@
         }
 
         .splash-subtitle {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             opacity: 0.9;
             margin-bottom: 40px;
             animation: fadeInUp 1.5s ease;
@@ -99,7 +125,6 @@
             background: var(--secondary);
             border-radius: 10px;
             box-shadow: 0 0 15px var(--secondary);
-            /* Diatur pas 6.8 detik agar sinkron dengan durasi 7 detik */
             animation: loadingProgress 6.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
@@ -126,28 +151,80 @@
             pointer-events: none;
         }
 
-        /* --- BACKGROUND & SILUET MASJID --- */
-        .bg-pattern {
+        /* --- ORNAMEN LATAR BELAKANG ISLAMI MERIAH --- */
+        .islamic-bg-pattern {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            opacity: 0.04;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l15 15-15 15L15 15 30 0zm0 30l15 15-15 15-15-15 15-15z' fill='%23196136' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.08;
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23196136' fill-rule='evenodd'%3E%3Cpath d='M40 0l40 40-40 40L0 40zM40 10l30 30-30 30L10 40z'/%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3C/g%3E%3C/svg%3E");
+            z-index: -4;
+        }
+
+        .hanging-lanterns {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 40px;
+        }
+
+        .lantern-string {
+            width: 3px;
+            background: linear-gradient(to bottom, #d4af37, #196136);
+            height: 180px;
+            position: relative;
+            animation: swing 4s infinite ease-in-out alternate;
+            transform-origin: top center;
+        }
+
+        .lantern-string:nth-child(2) {
+            height: 240px;
+            animation-delay: 1.5s;
+        }
+
+        .lantern-body {
+            position: absolute;
+            bottom: -40px;
+            left: -18px;
+            width: 40px;
+            height: 50px;
+            background: linear-gradient(135deg, #d4af37, #aa820a);
+            border-radius: 20px 20px 10px 10px;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+            animation: glowLantern 2s infinite alternate;
+        }
+
+        @keyframes swing {
+            0% { transform: rotate(-5deg); }
+            100% { transform: rotate(5deg); }
+        }
+
+        @keyframes glowLantern {
+            0% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.4); }
+            100% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.9); }
+        }
+
+        .mosque-bg-layer1 {
+            position: fixed;
+            bottom: 0; left: 0; width: 100%; height: 28vh;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23196136' fill-opacity='0.15' d='M0,224L60,202.7C120,181,240,139,360,149.3C480,160,600,224,720,229.3C840,235,960,181,1080,165.3C1200,149,1320,171,1380,181.3L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover; background-position: bottom;
             z-index: -3;
         }
 
-        .mosque-bg {
+        .mosque-bg-layer2 {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 35vh;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23cbd5e1' fill-opacity='0.4' d='M0,256L48,229.3C96,203,192,149,288,154.7C384,160,480,224,576,218.7C672,213,768,139,864,128C960,117,1056,171,1152,197.3C1248,224,1344,224,1392,224L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3Cpath fill='%2394a3b8' fill-opacity='0.3' d='M0,128L60,149.3C120,171,240,213,360,208C480,203,600,149,720,144C840,139,960,181,1080,202.7C1200,224,1320,224,1380,224L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-            background-size: cover;
-            background-position: bottom;
+            bottom: 0; left: 0; width: 100%; height: 38vh;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23124626' fill-opacity='0.25' d='M0,160L48,170.7C96,181,192,203,288,197.3C384,192,480,160,576,165.3C672,171,768,213,864,213.3C960,213,1056,171,1152,149.3C1248,128,1344,128,1392,128L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover; background-position: bottom;
             z-index: -2;
         }
 
-        /* --- PARTIKEL GERAK SPEKTAKULER --- */
         .particles {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -156,20 +233,20 @@
         }
         .particle {
             position: absolute;
-            background: radial-gradient(circle, rgba(139, 195, 74, 0.8) 0%, rgba(25, 97, 54, 0.1) 70%);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.9) 0%, rgba(139, 195, 74, 0.2) 70%);
             border-radius: 50%;
-            animation: floatParticle 12s infinite linear;
+            animation: floatParticle 10s infinite linear;
         }
-        .particle:nth-child(1) { width: 50px; height: 50px; left: 5%; bottom: -60px; animation-duration: 10s; }
-        .particle:nth-child(2) { width: 30px; height: 30px; left: 25%; bottom: -60px; animation-duration: 15s; animation-delay: 2s; }
-        .particle:nth-child(3) { width: 60px; height: 60px; left: 65%; bottom: -60px; animation-duration: 12s; animation-delay: 4s; }
-        .particle:nth-child(4) { width: 25px; height: 25px; left: 80%; bottom: -60px; animation-duration: 14s; animation-delay: 1s; }
-        .particle:nth-child(5) { width: 40px; height: 40px; left: 45%; bottom: -60px; animation-duration: 18s; animation-delay: 3s; }
+        .particle:nth-child(1) { width: 15px; height: 15px; left: 10%; bottom: -40px; animation-duration: 9s; }
+        .particle:nth-child(2) { width: 10px; height: 10px; left: 30%; bottom: -40px; animation-duration: 13s; animation-delay: 2s; }
+        .particle:nth-child(3) { width: 20px; height: 20px; left: 70%; bottom: -40px; animation-duration: 11s; animation-delay: 4s; }
+        .particle:nth-child(4) { width: 12px; height: 12px; left: 85%; bottom: -40px; animation-duration: 14s; animation-delay: 1s; }
+        .particle:nth-child(5) { width: 18px; height: 18px; left: 50%; bottom: -40px; animation-duration: 16s; animation-delay: 3s; }
 
         @keyframes floatParticle {
-            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.8; }
-            50% { transform: translateY(-50vh) rotate(180deg) scale(1.2); opacity: 0.4; }
-            100% { transform: translateY(-105vh) rotate(360deg) scale(0.8); opacity: 0; }
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.9; }
+            50% { transform: translateY(-50vh) rotate(180deg) scale(1.3); opacity: 0.5; }
+            100% { transform: translateY(-105vh) rotate(360deg) scale(0.7); opacity: 0; }
         }
 
         .container {
@@ -191,15 +268,68 @@
             margin-bottom: 35px;
         }
 
-        /* KOTAK SALAM & KALIMAT PEMBUKA */
+        /* --- ANIMASI ILUSTRASI ORANG BERSEDEKAH SAMPAH --- */
+        .charity-animation-box {
+            background: linear-gradient(135deg, rgba(25, 97, 54, 0.08), rgba(139, 195, 74, 0.15));
+            border: 2px dashed var(--primary);
+            border-radius: 24px;
+            padding: 25px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            box-shadow: 0 10px 25px rgba(25, 97, 54, 0.08);
+        }
+
+        .charity-icon-anim {
+            width: 90px;
+            height: 90px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(25, 97, 54, 0.3);
+            animation: floatCharity 3s infinite ease-in-out;
+            flex-shrink: 0;
+        }
+
+        .charity-icon-anim svg {
+            width: 50px;
+            height: 50px;
+            fill: var(--text-light);
+        }
+
+        @keyframes floatCharity {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8deg) rotate(3deg); }
+        }
+
+        .charity-text h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .charity-text p {
+            font-size: 0.95rem;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+
         .welcome-banner {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 24px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(25, 97, 54, 0.1);
             text-align: center;
             border-top: 5px solid var(--primary);
+            border-left: 2px solid var(--secondary);
+            border-right: 2px solid var(--secondary);
         }
 
         .welcome-banner h2 {
@@ -215,23 +345,22 @@
             line-height: 1.6;
         }
 
-        /* LOGO UTAMA */
         .logo-kkn {
-            width: 150px;
-            height: 150px;
+            width: 155px;
+            height: 155px;
             border-radius: 50%;
             object-fit: contain;
             margin: 0 auto 20px;
             display: block;
             background-color: white;
-            box-shadow: 0 15px 35px rgba(25, 97, 54, 0.2);
-            border: 4px solid var(--primary);
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.4);
+            border: 4px solid var(--accent-gold);
             animation: logoGlow 3s infinite ease-in-out;
         }
 
         @keyframes logoGlow {
-            0%, 100% { transform: scale(1); box-shadow: 0 15px 35px rgba(25, 97, 54, 0.2); }
-            50% { transform: scale(1.04); box-shadow: 0 0 25px rgba(139, 195, 74, 0.6); }
+            0%, 100% { transform: scale(1); box-shadow: 0 0 25px rgba(212, 175, 55, 0.4); }
+            50% { transform: scale(1.04); box-shadow: 0 0 45px rgba(139, 195, 74, 0.8); }
         }
 
         h1 {
@@ -256,6 +385,7 @@
             margin-bottom: 20px;
             text-transform: uppercase;
             box-shadow: 0 8px 20px rgba(25, 97, 54, 0.25);
+            border: 1px solid rgba(212, 175, 55, 0.4);
         }
 
         .eco-masjid {
@@ -269,7 +399,6 @@
             gap: 10px;
         }
 
-        /* --- KARTU MENU UTAMA --- */
         .action-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -295,10 +424,10 @@
 
         .card:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 45px rgba(25, 97, 54, 0.2);
+            box-shadow: 0 20px 45px rgba(25, 97, 54, 0.25);
         }
 
-        .card-web { background: linear-gradient(145deg, #196136, #124626); color: var(--text-light); border: 2px solid rgba(255,255,255,0.2); }
+        .card-web { background: linear-gradient(145deg, #196136, #124626); color: var(--text-light); border: 2px solid rgba(212, 175, 55, 0.3); }
         .card-web .icon svg { fill: var(--text-light); width: 80px; height: 80px; margin-bottom: 15px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); }
         
         .card-video { background: linear-gradient(145deg, #ffffff, #fffdf7); color: var(--primary); border: 2px solid rgba(25, 97, 54, 0.15); }
@@ -321,12 +450,11 @@
         }
 
         .card-web .btn { background-color: var(--text-light); color: var(--primary); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .card-web:hover .btn { background-color: var(--secondary); color: white; transform: scale(1.05); }
+        .card-web:hover .btn { background-color: var(--accent-gold); color: white; transform: scale(1.05); }
         
         .card-video .btn { background-color: var(--primary); color: var(--text-light); box-shadow: 0 5px 15px rgba(25,97,54,0.2); }
         .card-video:hover .btn { background-color: #124626; transform: scale(1.05); }
 
-        /* --- SOSIAL MEDIA GRID --- */
         .social-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -370,9 +498,9 @@
             flex-shrink: 0;
         }
 
-        /* --- INFORMASI SECTION --- */
         .info-section {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
@@ -380,6 +508,7 @@
             flex-direction: column;
             gap: 20px;
             border-left: 8px solid var(--secondary);
+            border-right: 2px solid rgba(212, 175, 55, 0.3);
         }
 
         .reminder { display: flex; align-items: center; gap: 15px; font-size: 1.1rem; color: var(--text-dark); }
@@ -399,7 +528,6 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.02);
         }
 
-        /* --- TOMBOL KONTROL MUSIK --- */
         .music-toggle-btn {
             position: fixed;
             bottom: 25px;
@@ -419,10 +547,11 @@
             align-items: center;
             gap: 8px;
             transition: all 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.5);
         }
         .music-toggle-btn:hover {
             transform: scale(1.08) translateY(-2px);
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            background: linear-gradient(135deg, var(--accent-gold), var(--primary));
         }
 
         @media (max-width: 768px) {
@@ -431,6 +560,8 @@
             .tagline { font-size: 0.8rem; padding: 8px 18px; }
             .eco-masjid { font-size: 1.6rem; }
             .music-toggle-btn { bottom: 15px; right: 15px; font-size: 0.9rem; padding: 10px 16px; }
+            .hanging-lanterns { padding: 0 10px; }
+            .charity-animation-box { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -438,7 +569,10 @@
 
     <!-- ANIMASI PEMBUKA SPEKTAKULER BERDURASI 7 DETIK -->
     <div id="splash-screen">
-        <img src="IMG_3183.png" alt="Logo KKN" class="splash-logo">
+        <div class="splash-logo-container">
+            <div class="splash-ring"></div>
+            <img src="IMG_3183.png" alt="Logo KKN" class="splash-logo">
+        </div>
         <div class="splash-title">SEDEKAH SAMPAH</div>
         <div class="splash-subtitle">Gerakan Eco Masjid - KKN 65 UIN Gus Dur</div>
         <div class="loader-bar">
@@ -446,7 +580,7 @@
         </div>
     </div>
 
-    <!-- Audio Element menggunakan file Egypt.mp3 yang sudah ada di GitHub Anda -->
+    <!-- Audio Element -->
     <audio id="bgMusic" loop>
         <source src="Egypt.mp3" type="audio/mpeg">
     </audio>
@@ -456,11 +590,16 @@
         🎵 Putar Musik
     </button>
 
-    <!-- Background Elements -->
-    <div class="bg-pattern"></div>
-    <div class="mosque-bg"></div>
+    <!-- Background Elements & Ornamen Meriah -->
+    <div class="islamic-bg-pattern"></div>
+    <div class="mosque-bg-layer1"></div>
+    <div class="mosque-bg-layer2"></div>
     
-    <!-- Animasi Partikel Bergerak -->
+    <div class="hanging-lanterns">
+        <div class="lantern-string"><div class="lantern-body"></div></div>
+        <div class="lantern-string"><div class="lantern-body"></div></div>
+    </div>
+    
     <div class="particles">
         <div class="particle"></div>
         <div class="particle"></div>
@@ -473,10 +612,21 @@
         <header>
             <img src="IMG_3183.png" alt="Logo KKN 65 UIN Gus Dur" class="logo-kkn">
             
-            <!-- SALAM DAN KALIMAT PEMBUKA YANG MENARIK -->
             <div class="welcome-banner">
                 <h2>Assalamu'alaikum Warahmatullahi Wabarakatuh</h2>
                 <p>Selamat datang di portal resmi <b>Gerakan Eco Masjid</b>. Mari bersama-sama kita wujudkan kepedulian terhadap lingkungan dan masjid melalui langkah kecil yang penuh keberkahan.</p>
+            </div>
+
+            <div class="charity-animation-box">
+                <div class="charity-icon-anim">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </div>
+                <div class="charity-text">
+                    <h3>Sedekah Menjadi Solusi & Amal Jariyah</h3>
+                    <p>Setiap botol dan sampah yang Anda sedekahkan tidak hanya membersihkan lingkungan, tetapi juga mengalirkan pahala untuk kemakmuran masjid.</p>
+                </div>
             </div>
 
             <h1>SEDEKAH<br>SAMPAH</h1>
@@ -520,7 +670,7 @@
             </a>
         </main>
 
-        <!-- TOMBOL SOSIAL MEDIA (INSTAGRAM & TIKTOK) -->
+        <!-- TOMBOL SOSIAL MEDIA -->
         <div class="social-grid">
             <a href="https://www.instagram.com/kkn65_lamburkds?igsh=MTF6enE0OW9qMzhrMA==" class="social-btn btn-ig" target="_blank" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -546,13 +696,13 @@
         </section>
     </div>
 
-    <!-- Script untuk animasi pembuka tepat 7 detik & kontrol musik -->
+    <!-- Script untuk animasi pembuka 7 detik & kontrol musik -->
     <script>
         window.addEventListener("load", function() {
             setTimeout(function() {
                 var splash = document.getElementById("splash-screen");
                 splash.classList.add("hidden");
-            }, 7000); // Durasi animasi splash screen diset pas 7 detik (7000 milidetik)
+            }, 7000);
         });
 
         var audio = document.getElementById("bgMusic");
