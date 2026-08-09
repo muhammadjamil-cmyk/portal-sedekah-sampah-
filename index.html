@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sedekah Sampah Eco Masjid</title>
+    <title>Sedekah Sampah Eco Masjid - KKN 65 UIN Gus Dur</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #196136; /* Warna Hijau Gelap */
-            --secondary: #8bc34a; /* Warna Hijau Terang */
-            --bg-color: #f7f5ee; /* Warna Krem/Beige */
+            --primary: #196136;
+            --secondary: #8bc34a;
+            --bg-color: #f7f5ee;
             --text-dark: #2d3748;
             --text-light: #ffffff;
         }
@@ -31,16 +31,15 @@
             overflow-x: hidden;
         }
 
-        /* Pattern Background Islami yang transparan */
+        /* Latar Belakang & Siluet Masjid */
         .bg-pattern {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             opacity: 0.04;
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l15 15-15 15L15 15 30 0zm0 30l15 15-15 15-15-15 15-15z' fill='%23196136' fill-rule='evenodd'/%3E%3C/svg%3E");
-            z-index: -2;
+            z-index: -3;
         }
 
-        /* Siluet Masjid di bagian bawah */
         .mosque-bg {
             position: fixed;
             bottom: 0;
@@ -50,7 +49,31 @@
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23cbd5e1' fill-opacity='0.4' d='M0,256L48,229.3C96,203,192,149,288,154.7C384,160,480,224,576,218.7C672,213,768,139,864,128C960,117,1056,171,1152,197.3C1248,224,1344,224,1392,224L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3Cpath fill='%2394a3b8' fill-opacity='0.3' d='M0,128L60,149.3C120,171,240,213,360,208C480,203,600,149,720,144C840,139,960,181,1080,202.7C1200,224,1320,224,1380,224L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
             background-size: cover;
             background-position: bottom;
+            z-index: -2;
+        }
+
+        /* --- ANIMASI GAMBAR BERGERAK (PARTIKEL MELAYANG) --- */
+        .particles {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
             z-index: -1;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(139, 195, 74, 0.4);
+            border-radius: 50%;
+            animation: floatup 15s infinite linear;
+        }
+        .particle:nth-child(1) { width: 40px; height: 40px; left: 10%; bottom: -50px; animation-duration: 12s; }
+        .particle:nth-child(2) { width: 25px; height: 25px; left: 30%; bottom: -50px; animation-duration: 18s; animation-delay: 2s; }
+        .particle:nth-child(3) { width: 50px; height: 50px; left: 70%; bottom: -50px; animation-duration: 14s; animation-delay: 4s; }
+        .particle:nth-child(4) { width: 20px; height: 20px; left: 85%; bottom: -50px; animation-duration: 16s; animation-delay: 0s; }
+        .particle:nth-child(5) { width: 35px; height: 35px; left: 50%; bottom: -50px; animation-duration: 20s; animation-delay: 5s; }
+
+        @keyframes floatup {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
         }
 
         .container {
@@ -64,6 +87,26 @@
         header {
             text-align: center;
             margin-bottom: 40px;
+        }
+
+        /* LOGO KKN */
+        .logo-kkn {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: contain;
+            margin: 0 auto 20px;
+            display: block;
+            background-color: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 4px solid var(--primary);
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         h1 {
@@ -100,7 +143,6 @@
             gap: 10px;
         }
 
-        /* Action Cards - Grid untuk dua tombol utama */
         .action-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -108,7 +150,6 @@
             margin-bottom: 40px;
         }
 
-        /* CARD BISA DIKLIK KESELURUHAN */
         .card {
             text-decoration: none;
             border-radius: 24px;
@@ -130,52 +171,16 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
 
-        /* Card 1: Web Sedekah Sampah (Warna Hijau) */
-        .card-web {
-            background-color: var(--primary);
-            color: var(--text-light);
-            border: 2px solid var(--primary);
-        }
+        .card-web { background-color: var(--primary); color: var(--text-light); border: 2px solid var(--primary); }
+        .card-web .icon svg { fill: var(--text-light); width: 100px; height: 100px; margin-bottom: 20px; }
+        
+        .card-video { background-color: #fffdf7; color: var(--primary); border: 2px solid var(--primary); }
+        .card-video .icon svg { fill: var(--primary); width: 100px; height: 100px; margin-bottom: 20px; }
 
-        .card-web .icon svg {
-            fill: var(--text-light);
-            width: 100px;
-            height: 100px;
-            margin-bottom: 20px;
-        }
+        .card h3 { font-family: 'Montserrat', sans-serif; font-size: 1.6rem; margin-bottom: 15px; font-weight: 800; line-height: 1.2; }
+        .card p { font-size: 1rem; opacity: 0.9; margin-bottom: 30px; }
+        .card-video p { color: #4a5568; }
 
-        /* Card 2: Video Tutorial (Warna Krem/Putih dengan stroke hijau) */
-        .card-video {
-            background-color: #fffdf7; 
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .card-video .icon svg {
-            fill: var(--primary);
-            width: 100px;
-            height: 100px;
-            margin-bottom: 20px;
-        }
-
-        .card h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.6rem;
-            margin-bottom: 15px;
-            font-weight: 800;
-            line-height: 1.2;
-        }
-
-        .card p {
-            font-size: 1rem;
-            opacity: 0.9;
-            margin-bottom: 30px;
-        }
-        .card-video p {
-            color: #4a5568;
-        }
-
-        /* Tombol di dalam card (Hanya hiasan UX agar tahu bisa diklik) */
         .btn {
             display: inline-block;
             padding: 14px 30px;
@@ -188,25 +193,12 @@
             letter-spacing: 0.5px;
         }
 
-        .card-web .btn {
-            background-color: var(--text-light);
-            color: var(--primary);
-        }
-        .card-web:hover .btn {
-            background-color: #e2e8f0;
-            transform: scale(1.05);
-        }
+        .card-web .btn { background-color: var(--text-light); color: var(--primary); }
+        .card-web:hover .btn { background-color: #e2e8f0; transform: scale(1.05); }
+        
+        .card-video .btn { background-color: var(--primary); color: var(--text-light); }
+        .card-video:hover .btn { background-color: #124626; transform: scale(1.05); }
 
-        .card-video .btn {
-            background-color: var(--primary);
-            color: var(--text-light);
-        }
-        .card-video:hover .btn {
-            background-color: #124626;
-            transform: scale(1.05);
-        }
-
-        /* Pengganti QR Code: Info Section */
         .info-section {
             background: white;
             border-radius: 20px;
@@ -218,24 +210,10 @@
             border-left: 8px solid var(--secondary);
         }
 
-        .reminder {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 1.1rem;
-            color: var(--text-dark);
-        }
-        .reminder strong {
-            color: var(--primary);
-            font-size: 1.5rem;
-        }
+        .reminder { display: flex; align-items: center; gap: 15px; font-size: 1.1rem; color: var(--text-dark); }
+        .reminder strong { color: var(--primary); font-size: 1.5rem; }
 
-        .waste-types {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
+        .waste-types { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; }
         .waste-badge {
             background: #f1f5f9;
             padding: 10px 20px;
@@ -248,20 +226,71 @@
             border: 1px solid #cbd5e1;
         }
 
+        /* --- TOMBOL KONTROL MUSIK --- */
+        .music-toggle-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(25, 97, 54, 0.4);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .music-toggle-btn:hover {
+            transform: scale(1.05);
+            background-color: var(--secondary);
+        }
+
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .action-grid { grid-template-columns: 1fr; }
             .tagline { font-size: 0.8rem; padding: 6px 15px; }
             .eco-masjid { font-size: 1.8rem; }
+            .music-toggle-btn { bottom: 15px; right: 15px; font-size: 0.9rem; padding: 10px 15px; }
         }
     </style>
 </head>
 <body>
+    
+    <!-- Audio Element (Pastikan file musik bernama 'musik.mp3' diupload ke GitHub) -->
+    <audio id="bgMusic" loop>
+        <source src="musik.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Tombol Musik -->
+    <button class="music-toggle-btn" id="musicBtn" onclick="toggleMusic()">
+        🎵 Putar Musik
+    </button>
+
+    <!-- Background Elements -->
     <div class="bg-pattern"></div>
     <div class="mosque-bg"></div>
+    
+    <!-- Animasi Partikel -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
 
     <div class="container">
         <header>
+            <!-- Logo ditambahkan di sini (Pastikan file gambar bernama 'logo.png' diupload ke GitHub) -->
+            <img src="logo.png" alt="Logo KKN 65 UIN Gus Dur" class="logo-kkn">
+            
             <h1>SEDEKAH<br>SAMPAH</h1>
             <div class="tagline">Untuk Masjid • Untuk Bumi • Untuk Kita Semua</div>
             <div class="eco-masjid">
@@ -274,10 +303,7 @@
             </div>
         </header>
 
-        <!-- KOTAK MENU BISA DIKLIK -->
         <main class="action-grid">
-            
-            <!-- Card 1: Ke Web -->
             <a href="https://sedekah-sampah.uingusdur.ac.id/beranda" class="card card-web" target="_blank" rel="noopener noreferrer">
                 <div class="icon">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -292,7 +318,6 @@
                 <div class="btn">Buka Web</div>
             </a>
 
-            <!-- Card 2: Ke Video -->
             <a href="https://drive.google.com/file/d/1neARz0i3px3iQlhRsioIQWjSbsFnS4Nu/view?usp=sharing" class="card card-video" target="_blank" rel="noopener noreferrer">
                 <div class="icon">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -304,10 +329,8 @@
                 <p>Tonton panduan langkah demi langkah cara menggunakan sistem web kami.</p>
                 <div class="btn">Tonton Video</div>
             </a>
-
         </main>
 
-        <!-- BAGIAN INFO (PENGGANTI QR CODE) -->
         <section class="info-section">
             <div class="reminder">
                 <strong>INGAT!</strong> 
@@ -320,5 +343,23 @@
             </div>
         </section>
     </div>
+
+    <!-- Script untuk menyalakan/mematikan musik -->
+    <script>
+        var audio = document.getElementById("bgMusic");
+        var btn = document.getElementById("musicBtn");
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                btn.innerHTML = "⏸️ Matikan Musik";
+                btn.style.backgroundColor = "#e53e3e";
+            } else {
+                audio.pause();
+                btn.innerHTML = "🎵 Putar Musik";
+                btn.style.backgroundColor = "var(--primary)";
+            }
+        }
+    </script>
 </body>
 </html>
