@@ -31,7 +31,100 @@
             overflow-x: hidden;
         }
 
-        /* Latar Belakang & Siluet Masjid */
+        /* --- ANIMASI PEMBUKA SPEKTAKULER (SPLASH SCREEN) --- */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #237a4a 0%, #0d381e 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .splash-logo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: contain;
+            background-color: white;
+            padding: 6px;
+            box-shadow: 0 0 40px rgba(139, 195, 74, 0.6);
+            border: 4px solid var(--secondary);
+            animation: scalePulse 2s infinite ease-in-out;
+            margin-bottom: 20px;
+        }
+
+        .splash-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.3rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease;
+        }
+
+        .splash-subtitle {
+            font-size: 1.05rem;
+            opacity: 0.9;
+            margin-bottom: 35px;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .loader-bar {
+            width: 220px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .loader-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: var(--secondary);
+            border-radius: 10px;
+            box-shadow: 0 0 10px var(--secondary);
+            animation: loadingProgress 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes loadingProgress {
+            0% { width: 0%; }
+            60% { width: 80%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes scalePulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(139, 195, 74, 0.4); }
+            50% { transform: scale(1.08); box-shadow: 0 0 50px rgba(139, 195, 74, 0.8); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* --- BACKGROUND & SILUET MASJID --- */
         .bg-pattern {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -52,7 +145,7 @@
             z-index: -2;
         }
 
-        /* --- ANIMASI GAMBAR BERGERAK (PARTIKEL MELAYANG) --- */
+        /* --- PARTIKEL GERAK SPEKTAKULER --- */
         .particles {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -61,19 +154,20 @@
         }
         .particle {
             position: absolute;
-            background: rgba(139, 195, 74, 0.4);
+            background: radial-gradient(circle, rgba(139, 195, 74, 0.8) 0%, rgba(25, 97, 54, 0.1) 70%);
             border-radius: 50%;
-            animation: floatup 15s infinite linear;
+            animation: floatParticle 12s infinite linear;
         }
-        .particle:nth-child(1) { width: 40px; height: 40px; left: 10%; bottom: -50px; animation-duration: 12s; }
-        .particle:nth-child(2) { width: 25px; height: 25px; left: 30%; bottom: -50px; animation-duration: 18s; animation-delay: 2s; }
-        .particle:nth-child(3) { width: 50px; height: 50px; left: 70%; bottom: -50px; animation-duration: 14s; animation-delay: 4s; }
-        .particle:nth-child(4) { width: 20px; height: 20px; left: 85%; bottom: -50px; animation-duration: 16s; animation-delay: 0s; }
-        .particle:nth-child(5) { width: 35px; height: 35px; left: 50%; bottom: -50px; animation-duration: 20s; animation-delay: 5s; }
+        .particle:nth-child(1) { width: 50px; height: 50px; left: 5%; bottom: -60px; animation-duration: 10s; }
+        .particle:nth-child(2) { width: 30px; height: 30px; left: 25%; bottom: -60px; animation-duration: 15s; animation-delay: 2s; }
+        .particle:nth-child(3) { width: 60px; height: 60px; left: 65%; bottom: -60px; animation-duration: 12s; animation-delay: 4s; }
+        .particle:nth-child(4) { width: 25px; height: 25px; left: 80%; bottom: -60px; animation-duration: 14s; animation-delay: 1s; }
+        .particle:nth-child(5) { width: 40px; height: 40px; left: 45%; bottom: -60px; animation-duration: 18s; animation-delay: 3s; }
 
-        @keyframes floatup {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        @keyframes floatParticle {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.8; }
+            50% { transform: translateY(-50vh) rotate(180deg) scale(1.2); opacity: 0.4; }
+            100% { transform: translateY(-105vh) rotate(360deg) scale(0.8); opacity: 0; }
         }
 
         .container {
@@ -82,6 +176,12 @@
             padding: 40px 20px;
             position: relative;
             z-index: 1;
+            animation: mainFadeIn 1.2s ease;
+        }
+
+        @keyframes mainFadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         header {
@@ -89,7 +189,7 @@
             margin-bottom: 40px;
         }
 
-        /* LOGO KKN */
+        /* LOGO UTAMA */
         .logo-kkn {
             width: 150px;
             height: 150px;
@@ -98,15 +198,14 @@
             margin: 0 auto 20px;
             display: block;
             background-color: white;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(25, 97, 54, 0.2);
             border: 4px solid var(--primary);
-            animation: pulse 3s infinite ease-in-out;
+            animation: logoGlow 3s infinite ease-in-out;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        @keyframes logoGlow {
+            0%, 100% { transform: scale(1); box-shadow: 0 15px 35px rgba(25, 97, 54, 0.2); }
+            50% { transform: scale(1.04); box-shadow: 0 0 25px rgba(139, 195, 74, 0.6); }
         }
 
         h1 {
@@ -116,20 +215,21 @@
             color: var(--primary);
             line-height: 1.1;
             margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.06);
         }
 
         .tagline {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), #124626);
             color: var(--text-light);
             display: inline-block;
-            padding: 8px 24px;
+            padding: 10px 28px;
             border-radius: 50px;
             font-weight: 700;
             font-size: 1rem;
             letter-spacing: 1px;
             margin-bottom: 20px;
             text-transform: uppercase;
+            box-shadow: 0 8px 20px rgba(25, 97, 54, 0.25);
         }
 
         .eco-masjid {
@@ -143,6 +243,7 @@
             gap: 10px;
         }
 
+        /* --- KARTU MENU UTAMA --- */
         .action-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -155,7 +256,7 @@
             border-radius: 24px;
             padding: 35px 30px;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -167,14 +268,14 @@
         }
 
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 45px rgba(25, 97, 54, 0.2);
         }
 
-        .card-web { background-color: var(--primary); color: var(--text-light); border: 2px solid var(--primary); }
-        .card-web .icon svg { fill: var(--text-light); width: 80px; height: 80px; margin-bottom: 15px; }
+        .card-web { background: linear-gradient(145deg, #196136, #124626); color: var(--text-light); border: 2px solid rgba(255,255,255,0.2); }
+        .card-web .icon svg { fill: var(--text-light); width: 80px; height: 80px; margin-bottom: 15px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); }
         
-        .card-video { background-color: #fffdf7; color: var(--primary); border: 2px solid var(--primary); }
+        .card-video { background: linear-gradient(145deg, #ffffff, #fffdf7); color: var(--primary); border: 2px solid rgba(25, 97, 54, 0.15); }
         .card-video .icon svg { fill: var(--primary); width: 80px; height: 80px; margin-bottom: 15px; }
 
         .card h3 { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; margin-bottom: 10px; font-weight: 800; line-height: 1.2; }
@@ -193,10 +294,10 @@
             letter-spacing: 0.5px;
         }
 
-        .card-web .btn { background-color: var(--text-light); color: var(--primary); }
-        .card-web:hover .btn { background-color: #e2e8f0; transform: scale(1.05); }
+        .card-web .btn { background-color: var(--text-light); color: var(--primary); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .card-web:hover .btn { background-color: var(--secondary); color: white; transform: scale(1.05); }
         
-        .card-video .btn { background-color: var(--primary); color: var(--text-light); }
+        .card-video .btn { background-color: var(--primary); color: var(--text-light); box-shadow: 0 5px 15px rgba(25,97,54,0.2); }
         .card-video:hover .btn { background-color: #124626; transform: scale(1.05); }
 
         /* --- SOSIAL MEDIA GRID --- */
@@ -218,13 +319,13 @@
             font-weight: 700;
             font-size: 1.05rem;
             color: white;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
 
         .social-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.2);
         }
 
         .btn-ig {
@@ -232,8 +333,8 @@
         }
 
         .btn-tiktok {
-            background-color: #010101;
-            border: 1px solid #333;
+            background: linear-gradient(145deg, #111111, #222222);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .social-btn svg {
@@ -243,6 +344,7 @@
             flex-shrink: 0;
         }
 
+        /* --- INFORMASI SECTION --- */
         .info-section {
             background: white;
             border-radius: 20px;
@@ -268,6 +370,7 @@
             font-weight: 700;
             color: var(--primary);
             border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
         }
 
         /* --- TOMBOL KONTROL MUSIK --- */
@@ -275,16 +378,16 @@
             position: fixed;
             bottom: 25px;
             right: 25px;
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), #124626);
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 14px 22px;
             border-radius: 50px;
             font-family: 'Nunito', sans-serif;
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(25, 97, 54, 0.4);
+            box-shadow: 0 8px 25px rgba(25, 97, 54, 0.4);
             z-index: 100;
             display: flex;
             align-items: center;
@@ -292,20 +395,30 @@
             transition: all 0.3s ease;
         }
         .music-toggle-btn:hover {
-            transform: scale(1.05);
-            background-color: var(--secondary);
+            transform: scale(1.08) translateY(-2px);
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
         }
 
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .action-grid, .social-grid { grid-template-columns: 1fr; }
-            .tagline { font-size: 0.8rem; padding: 6px 15px; }
+            .tagline { font-size: 0.8rem; padding: 8px 18px; }
             .eco-masjid { font-size: 1.8rem; }
-            .music-toggle-btn { bottom: 15px; right: 15px; font-size: 0.9rem; padding: 10px 15px; }
+            .music-toggle-btn { bottom: 15px; right: 15px; font-size: 0.9rem; padding: 10px 16px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- ANIMASI PEMBUKA SPEKTAKULER (SPLASH SCREEN) -->
+    <div id="splash-screen">
+        <img src="IMG_3183.png" alt="Logo KKN" class="splash-logo">
+        <div class="splash-title">SEDEKAH SAMPAH</div>
+        <div class="splash-subtitle">Gerakan Eco Masjid - KKN 65 UIN Gus Dur</div>
+        <div class="loader-bar">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
 
     <!-- Audio Element menggunakan file Egypt.mp3 yang sudah ada di GitHub Anda -->
     <audio id="bgMusic" loop>
@@ -332,7 +445,6 @@
 
     <div class="container">
         <header>
-            <!-- Logo menggunakan nama file IMG_3183.png -->
             <img src="IMG_3183.png" alt="Logo KKN 65 UIN Gus Dur" class="logo-kkn">
             
             <h1>SEDEKAH<br>SAMPAH</h1>
@@ -402,8 +514,15 @@
         </section>
     </div>
 
-    <!-- Script untuk menyalakan/mematikan musik -->
+    <!-- Script untuk animasi pembuka & kontrol musik -->
     <script>
+        window.addEventListener("load", function() {
+            setTimeout(function() {
+                var splash = document.getElementById("splash-screen");
+                splash.classList.add("hidden");
+            }, 2400);
+        });
+
         var audio = document.getElementById("bgMusic");
         var btn = document.getElementById("musicBtn");
 
