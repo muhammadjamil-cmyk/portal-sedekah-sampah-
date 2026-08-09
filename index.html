@@ -226,58 +226,21 @@
             border: 1px solid #cbd5e1;
         }
 
-        /* --- TOMBOL KONTROL MUSIK --- */
-        .music-toggle-btn {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 50px;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(25, 97, 54, 0.4);
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-        .music-toggle-btn:hover {
-            transform: scale(1.05);
-            background-color: var(--secondary);
-        }
-
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .action-grid { grid-template-columns: 1fr; }
             .tagline { font-size: 0.8rem; padding: 6px 15px; }
             .eco-masjid { font-size: 1.8rem; }
-            .music-toggle-btn { bottom: 15px; right: 15px; font-size: 0.9rem; padding: 10px 15px; }
         }
     </style>
 </head>
 <body>
-    
-    <!-- Audio Element dengan link musik instrumen gratis yang stabil -->
-    <audio id="bgMusic" loop>
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=peaceful-ramadan-112200.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- Tombol Musik -->
-    <button class="music-toggle-btn" id="musicBtn" onclick="toggleMusic()">
-        🎵 Putar Musik
-    </button>
 
     <!-- Background Elements -->
     <div class="bg-pattern"></div>
     <div class="mosque-bg"></div>
     
-    <!-- Animasi Partikel -->
+    <!-- Animasi Partikel Bergerak -->
     <div class="particles">
         <div class="particle"></div>
         <div class="particle"></div>
@@ -288,8 +251,8 @@
 
     <div class="container">
         <header>
-            <!-- Logo dari foto Anda di-hosting publik agar langsung tampil tanpa perlu upload file tambahan -->
-            <img src="https://i.ibb.co.com/849yvQ6x/image.png" alt="Logo KKN 65 UIN Gus Dur" class="logo-kkn" onerror="this.src='https://via.placeholder.com/150/196136/FFFFFF?text=Logo+KKN'">
+            <!-- Logo membaca file bernama 'logo.png' di dalam folder github Anda -->
+            <img src="logo.png" alt="Logo KKN 65 UIN Gus Dur" class="logo-kkn">
             
             <h1>SEDEKAH<br>SAMPAH</h1>
             <div class="tagline">Untuk Masjid • Untuk Bumi • Untuk Kita Semua</div>
@@ -343,23 +306,5 @@
             </div>
         </section>
     </div>
-
-    <!-- Script untuk menyalakan/mematikan musik -->
-    <script>
-        var audio = document.getElementById("bgMusic");
-        var btn = document.getElementById("musicBtn");
-
-        function toggleMusic() {
-            if (audio.paused) {
-                audio.play();
-                btn.innerHTML = "⏸️ Matikan Musik";
-                btn.style.backgroundColor = "#e53e3e";
-            } else {
-                audio.pause();
-                btn.innerHTML = "🎵 Putar Musik";
-                btn.style.backgroundColor = "var(--primary)";
-            }
-        }
-    </script>
 </body>
 </html>
