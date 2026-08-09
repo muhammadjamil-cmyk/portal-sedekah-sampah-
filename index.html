@@ -151,7 +151,7 @@
             pointer-events: none;
         }
 
-        /* --- ORNAMEN LATAR BELAKANG ISLAMI MERIAH --- */
+        /* --- ORNAMEN LATAR BELAKANG ISLAMI & LAMPION --- */
         .islamic-bg-pattern {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -209,20 +209,19 @@
             100% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.9); }
         }
 
-        .mosque-bg-layer1 {
+        /* --- SILUET MASJID YANG LEBIH MEGAH DAN DETAIL DI BAWAH --- */
+        .mosque-silhouette {
             position: fixed;
-            bottom: 0; left: 0; width: 100%; height: 28vh;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23196136' fill-opacity='0.15' d='M0,224L60,202.7C120,181,240,139,360,149.3C480,160,600,224,720,229.3C840,235,960,181,1080,165.3C1200,149,1320,171,1380,181.3L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-            background-size: cover; background-position: bottom;
-            z-index: -3;
-        }
-
-        .mosque-bg-layer2 {
-            position: fixed;
-            bottom: 0; left: 0; width: 100%; height: 38vh;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23124626' fill-opacity='0.25' d='M0,160L48,170.7C96,181,192,203,288,197.3C384,192,480,160,576,165.3C672,171,768,213,864,213.3C960,213,1056,171,1152,149.3C1248,128,1344,128,1392,128L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-            background-size: cover; background-position: bottom;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 28vh;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300' preserveAspectRatio='none'%3E%3Cpath fill='%23124626' fill-opacity='0.22' d='M0,300 L0,180 L30,180 L35,100 L45,100 L50,180 L90,180 L95,130 L105,130 L110,180 L200,180 C230,120 290,100 350,180 L500,180 L510,80 L520,80 L525,180 L700,180 C750,110 830,110 880,180 L1050,180 L1055,90 L1065,90 L1070,180 L1200,180 L1200,300 Z'/%3E%3Cpath fill='%23196136' fill-opacity='0.16' d='M0,300 L0,220 L150,220 L160,140 L170,140 L175,220 L350,220 C400,150 480,150 530,220 L800,220 L810,60 L825,60 L835,220 L1050,220 L1060,120 L1070,120 L1075,220 L1200,220 L1200,300 Z'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-position: bottom;
+            background-size: cover;
             z-index: -2;
+            pointer-events: none;
         }
 
         .particles {
@@ -268,7 +267,7 @@
             margin-bottom: 35px;
         }
 
-        /* --- ANIMASI ILUSTRASI ORANG BERSEDEKAH SAMPAH --- */
+        /* --- ANIMASI ILUSTRASI ORANG BERSEDEKAH SAMPAH (INTERAKTIF & HIDUP) --- */
         .charity-animation-box {
             background: linear-gradient(135deg, rgba(25, 97, 54, 0.08), rgba(139, 195, 74, 0.15));
             border: 2px dashed var(--primary);
@@ -278,32 +277,87 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
             box-shadow: 0 10px 25px rgba(25, 97, 54, 0.08);
         }
 
-        .charity-icon-anim {
-            width: 90px;
-            height: 90px;
-            background: var(--primary);
-            border-radius: 50%;
+        .charity-illustration {
             display: flex;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 25px rgba(25, 97, 54, 0.3);
-            animation: floatCharity 3s infinite ease-in-out;
+            gap: 12px;
             flex-shrink: 0;
         }
 
-        .charity-icon-anim svg {
-            width: 50px;
-            height: 50px;
-            fill: var(--text-light);
+        .person-anim {
+            width: 55px;
+            height: 75px;
+            background: var(--primary);
+            border-radius: 28px 28px 10px 10px;
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(25,97,54,0.3);
+            animation: personMove 2s infinite ease-in-out alternate;
         }
 
-        @keyframes floatCharity {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-8deg) rotate(3deg); }
+        /* Kepala Orang */
+        .person-anim::before {
+            content: '';
+            position: absolute;
+            top: -18px;
+            width: 26px;
+            height: 26px;
+            background: #d4af37;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Tangan Membawa Botol Sampah yang Bergerak */
+        .trash-item-anim {
+            width: 30px;
+            height: 35px;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='%238bc34a' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 2h12v2H6V2zM4 6h16v2H4V6zm2 4h12v12H6V10zm3 2v8h2v-8H9zm4 0v8h2v-8h-2z'/%3E%3C/svg%3E") no-repeat center;
+            background-size: contain;
+            animation: tossTrash 2s infinite ease-in-out;
+        }
+
+        /* Kotak/Wadah Sedekah */
+        .drop-box-anim {
+            width: 65px;
+            height: 60px;
+            background: #124626;
+            border-radius: 12px;
+            border: 3px solid var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+        .drop-box-anim::after {
+            content: '❤️';
+            font-size: 1.5rem;
+            position: absolute;
+            top: -15px;
+            animation: heartPulse 1.5s infinite;
+        }
+
+        @keyframes personMove {
+            0% { transform: translateX(0) rotate(0deg); }
+            100% { transform: translateX(8px) rotate(-5deg); }
+        }
+
+        @keyframes tossTrash {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            50% { transform: translate(25px, -15px) scale(0.8) rotate(45deg); opacity: 0.9; }
+            100% { transform: translate(40px, 0) scale(0.4) rotate(90deg); opacity: 0; }
+        }
+
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.25); }
         }
 
         .charity-text h3 {
@@ -567,7 +621,7 @@
 </head>
 <body>
 
-    <!-- ANIMASI PEMBUKA SPEKTAKULER BERDURASI 7 DETIK -->
+    <!-- ANIMASI PEMBUKA SPEKTAKULER (7 DETIK) -->
     <div id="splash-screen">
         <div class="splash-logo-container">
             <div class="splash-ring"></div>
@@ -592,8 +646,7 @@
 
     <!-- Background Elements & Ornamen Meriah -->
     <div class="islamic-bg-pattern"></div>
-    <div class="mosque-bg-layer1"></div>
-    <div class="mosque-bg-layer2"></div>
+    <div class="mosque-silhouette"></div>
     
     <div class="hanging-lanterns">
         <div class="lantern-string"><div class="lantern-body"></div></div>
@@ -617,11 +670,13 @@
                 <p>Selamat datang di portal resmi <b>Gerakan Eco Masjid</b>. Mari bersama-sama kita wujudkan kepedulian terhadap lingkungan dan masjid melalui langkah kecil yang penuh keberkahan.</p>
             </div>
 
+            <!-- ANIMASI ILUSTRASI ORANG BERSEDEKAH SAMPAH -->
             <div class="charity-animation-box">
-                <div class="charity-icon-anim">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                    </svg>
+                <div class="charity-illustration">
+                    <div class="person-anim">
+                        <div class="trash-item-anim"></div>
+                    </div>
+                    <div class="drop-box-anim"></div>
                 </div>
                 <div class="charity-text">
                     <h3>Sedekah Menjadi Solusi & Amal Jariyah</h3>
