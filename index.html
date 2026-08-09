@@ -307,9 +307,9 @@
 </head>
 <body>
 
-    <!-- Audio Element dengan musik instrumen religi publik yang otomatis aktif -->
+    <!-- Audio Element menggunakan file Egypt.mp3 yang sudah ada di GitHub Anda -->
     <audio id="bgMusic" loop>
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=peaceful-ramadan-112200.mp3" type="audio/mpeg">
+        <source src="Egypt.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Tombol Musik -->
@@ -332,7 +332,7 @@
 
     <div class="container">
         <header>
-            <!-- Menggunakan file foto IMG_3183.png yang sudah ada di GitHub Anda -->
+            <!-- Logo menggunakan nama file IMG_3183.png -->
             <img src="IMG_3183.png" alt="Logo KKN 65 UIN Gus Dur" class="logo-kkn">
             
             <h1>SEDEKAH<br>SAMPAH</h1>
@@ -409,9 +409,12 @@
 
         function toggleMusic() {
             if (audio.paused) {
-                audio.play();
-                btn.innerHTML = "⏸️ Matikan Musik";
-                btn.style.backgroundColor = "#e53e3e";
+                audio.play().then(() => {
+                    btn.innerHTML = "⏸️ Matikan Musik";
+                    btn.style.backgroundColor = "#e53e3e";
+                }).catch(error => {
+                    alert("Ketuk sekali lagi pada layar untuk memutar musik.");
+                });
             } else {
                 audio.pause();
                 btn.innerHTML = "🎵 Putar Musik";
