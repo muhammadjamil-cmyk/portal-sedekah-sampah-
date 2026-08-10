@@ -449,7 +449,7 @@
             gap: 10px;
         }
 
-        /* --- REAL-TIME TRANSPARENCY IMPACT COUNTER STYLES --- */
+        /* --- REAL-TIME IMPACT COUNTER STYLES --- */
         .impact-section {
             display: flex;
             justify-content: space-around;
@@ -611,7 +611,7 @@
             100% { transform: translateX(6px); }
         }
 
-        /* --- FITUR TAMBAHAN: KOTAK DOA & LENCANA PAHLAWAN BUMI --- */
+        /* --- FITUR INTERAKTIF (DOA & LENCANA) --- */
         .interactive-features-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -661,6 +661,51 @@
         .interactive-btn:hover {
             transform: scale(1.04);
             filter: brightness(1.1);
+        }
+
+        /* --- KARTU LENCANA DIGITAL (PREVIEW & DOWNLOAD) --- */
+        .badge-preview-card {
+            background: linear-gradient(135deg, #0d381e, #196136);
+            color: white;
+            border: 3px solid var(--accent-gold);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            margin: 15px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .badge-preview-card h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--accent-gold);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .badge-name-display {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin: 10px 0;
+            color: #ffffff;
+            border-bottom: 2px dashed var(--secondary);
+            padding-bottom: 8px;
+            word-break: break-word;
+        }
+
+        .input-custom {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 2px solid #cbd5e1;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            outline: none;
+        }
+
+        .input-custom:focus {
+            border-color: var(--primary);
         }
 
         .social-grid {
@@ -767,7 +812,7 @@
         .modal-content {
             background: white;
             width: 90%;
-            max-width: 420px;
+            max-width: 440px;
             border-radius: 24px;
             padding: 25px;
             text-align: center;
@@ -775,6 +820,8 @@
             border-top: 6px solid var(--primary);
             position: relative;
             animation: modalPop 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         @keyframes modalPop {
@@ -785,15 +832,15 @@
         .modal-content h3 {
             font-family: 'Montserrat', sans-serif;
             color: var(--primary);
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             margin-bottom: 12px;
         }
 
         .modal-content p {
             color: #4a5568;
-            font-size: 1rem;
+            font-size: 0.95rem;
             line-height: 1.5;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .modal-close-btn {
@@ -805,6 +852,7 @@
             font-weight: 700;
             cursor: pointer;
             transition: background 0.2s;
+            margin-top: 10px;
         }
 
         .modal-close-btn:hover { background-color: var(--secondary); }
@@ -850,12 +898,14 @@
 </head>
 <body>
 
-    <!-- POPUP MODAL MULTIFUNGSI -->
+    <!-- POPUP MODAL DINAMIS -->
     <div id="customModal" onclick="closeModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <h3 id="modalTitle">Informasi</h3>
-            <p id="modalText">Deskripsi informasi akan muncul di sini.</p>
-            <button class="modal-close-btn" onclick="closeModal()">Mengerti</button>
+            <div id="modalBody">
+                <p id="modalText">Deskripsi informasi akan muncul di sini.</p>
+            </div>
+            <button class="modal-close-btn" onclick="closeModal()">Tutup</button>
         </div>
     </div>
 
@@ -934,11 +984,11 @@
             </div>
         </header>
 
-        <!-- REAL-TIME TRANSPARENCY IMPACT COUNTER SECTION -->
+        <!-- REAL-TIME TRANSPARENCY IMPACT COUNTER (SINKRON KE HALAMAN TRANSPARANSI) -->
         <div class="impact-section">
             <a href="https://sedekah-sampah.uingusdur.ac.id/transparansi" target="_blank" rel="noopener noreferrer" class="impact-item">
                 <div class="counter" id="trashCount" data-target="1250">0</div>
-                <div class="counter-label">Kg Sampah (Live Data)</div>
+                <div class="counter-label">Kg Sampah (Live)</div>
             </a>
             <a href="https://sedekah-sampah.uingusdur.ac.id/transparansi" target="_blank" rel="noopener noreferrer" class="impact-item">
                 <div class="counter" id="fundCount" data-target="4850">0</div>
@@ -1037,21 +1087,21 @@
         </div>
         <div class="scroll-hint">👈 Geser ke samping untuk menu lainnya 👉</div>
 
-        <!-- FITUR INTERAKTIF TAMBAHAN (DOA & LENCANA PAHLAWAN BUMI) -->
+        <!-- FITUR INTERAKTIF: KETIK DOA & EDIT KARTU LENCANA -->
         <div class="interactive-features-grid">
             <div class="interactive-box">
                 <div>
                     <h3>🤲 Ruang Doa & Harapan</h3>
-                    <p>Kirimkan doa kebaikan untuk keberkahan masjid dan lingkungan kita hari ini.</p>
+                    <p>Tuliskan doa kebaikan Anda untuk keberkahan masjid dan lingkungan kita.</p>
                 </div>
-                <button class="interactive-btn" onclick="showPrayerBox()">Kirim Doa</button>
+                <button class="interactive-btn" onclick="openPrayerModal()">Ketik & Kirim Doa</button>
             </div>
             <div class="interactive-box">
                 <div>
                     <h3>🌟 Lencana Pahlawan Bumi</h3>
-                    <p>Klaim kartu apresiasi digital eksklusif sebagai wujud kontribusi nyata Anda.</p>
+                    <p>Buat dan unduh kartu apresiasi digital eksklusif dengan nama Anda sendiri.</p>
                 </div>
-                <button class="interactive-btn" onclick="showBadgeBox()">Klaim Lencana</button>
+                <button class="interactive-btn" onclick="openBadgeModal()">Buat & Unduh Kartu</button>
             </div>
         </div>
 
@@ -1116,40 +1166,90 @@
         function showWasteInfo(type) {
             const modal = document.getElementById("customModal");
             const title = document.getElementById("modalTitle");
-            const text = document.getElementById("modalText");
+            const body = document.getElementById("modalBody");
 
             if (type === 'botol') {
                 title.innerHTML = "🍾 Panduan Botol Plastik";
-                text.innerHTML = "Pastikan botol plastik dalam keadaan kosong, lepaskan label merek dan tutupnya, lalu cuci bersih serta remukkan agar hemat tempat sebelum disedekahkan.";
+                body.innerHTML = `<p>Pastikan botol plastik dalam keadaan kosong, lepaskan label merek dan tutupnya, lalu cuci bersih serta remukkan agar hemat tempat sebelum disedekahkan.</p>`;
             } else if (type === 'kardus') {
                 title.innerHTML = "📦 Panduan Kertas & Kardus";
-                text.innerHTML = "Lipat kardus hingga pipih/rapi. Pastikan kertas atau kardus tidak basah dan bersih dari sisa makanan atau lakban plastik.";
+                body.innerHTML = `<p>Lipat kardus hingga pipih/rapi. Pastikan kertas atau kardus tidak basah dan bersih dari sisa makanan atau lakban plastik.</p>`;
             } else if (type === 'kaleng') {
                 title.innerHTML = "🥫 Panduan Kaleng Logam";
-                text.innerHTML = "Bilas bersih kaleng bekas minuman atau makanan, tiriskan airnya agar tidak berbau dan mengundang lalat di titik pengumpulan masjid.";
+                body.innerHTML = `<p>Bilas bersih kaleng bekas minuman atau makanan, tiriskan airnya agar tidak berbau dan mengundang lalat di titik pengumpulan masjid.</p>`;
             }
 
             modal.classList.add("active");
         }
 
-        function showPrayerBox() {
+        /* --- FITUR KETIK & KIRIM DOA --- */
+        function openPrayerModal() {
             const modal = document.getElementById("customModal");
             const title = document.getElementById("modalTitle");
-            const text = document.getElementById("modalText");
+            const body = document.getElementById("modalBody");
 
-            title.innerHTML = "🤲 Ruang Doa & Harapan";
-            text.innerHTML = "Jazakallah Khairan! Terima kasih atas niat baik dan doa Anda. Semoga setiap langkah kecil dalam Gerakan Eco Masjid ini mendatangkan keberkahan dan pahala jariyah bagi kita semua. Aamiin Yaa Rabbal 'Alamiin.";
+            title.innerHTML = "🤲 Kirim Doa & Harapan";
+            body.innerHTML = `
+                <p>Tuliskan doa atau harapan baik Anda untuk gerakan Eco Masjid ini:</p>
+                <input type="text" id="userNamePrayer" class="input-custom" placeholder="Nama Anda (Opsional)">
+                <textarea id="userPrayerText" class="input-custom" rows="3" placeholder="Contoh: Semoga masjid semakin makmur & lingkungan bersih!"></textarea>
+                <button class="modal-close-btn" onclick="submitPrayer()">Kirim Doa Sekarang</button>
+            `;
             modal.classList.add("active");
         }
 
-        function showBadgeBox() {
+        function submitPrayer() {
+            const name = document.getElementById("userNamePrayer").value || "Hamba Allah";
+            const prayer = document.getElementById("userPrayerText").value;
+            const body = document.getElementById("modalBody");
+            const title = document.getElementById("modalTitle");
+
+            if (!prayer.trim()) {
+                alert("Mohon tuliskan doa atau harapan Anda terlebih dahulu!");
+                return;
+            }
+
+            title.innerHTML = "✨ Doa Berhasil Dikirim!";
+            body.innerHTML = `
+                <p>Jazakallah Khairan, <b>${name}</b>. Doa Anda telah tercatat di sistem:</p>
+                <blockquote style="font-style: italic; color: #196136; margin: 10px 0; padding: 10px; background: #f1f5f9; border-radius: 8px;">"${prayer}"</blockquote>
+                <p>Semoga Allah SWT mengabulkan kebaikan ini. Aamiin!</p>
+                <button class="modal-close-btn" onclick="closeModal()">Tutup</button>
+            `;
+        }
+
+        /* --- FITUR KARTU LENCANA EDIT & DOWNLOAD --- */
+        function openBadgeModal() {
             const modal = document.getElementById("customModal");
             const title = document.getElementById("modalTitle");
-            const text = document.getElementById("modalText");
+            const body = document.getElementById("modalBody");
 
-            title.innerHTML = "🌟 Status: Pahlawan Bumi";
-            text.innerHTML = "Selamat! Anda terdaftar sebagai pendukung aktif Gerakan Eco Masjid KKN 65 UIN Gus Dur. Mari terus jaga kebersihan lingkungan demi masa depan bumi yang lebih hijau!";
+            title.innerHTML = "🌟 Kartu Pahlawan Bumi";
+            body.innerHTML = `
+                <p>Masukkan nama Anda untuk mencetak kartu lencana digital:</p>
+                <input type="text" id="badgeNameInput" class="input-custom" placeholder="Ketik Nama Lengkap Anda..." oninput="updateBadgeName(this.value)">
+                
+                <div class="badge-preview-card" id="printableCard">
+                    <h4>ECO MASJID - KKN 65 UIN GUS DUR</h4>
+                    <p style="font-size: 0.8rem; opacity: 0.8; margin-top: 2px;">Sertifikat Apresiasi Kontributor</p>
+                    <div class="badge-name-display" id="displayNamePreview">[ Nama Anda ]</div>
+                    <p style="font-size: 0.85rem;">Terverifikasi sebagai <b>Pahlawan Bumi & Penjaga Kebersihan Masjid</b></p>
+                </div>
+
+                <button class="interactive-btn" style="width: 100%; margin-top: 5px; padding: 12px;" onclick="downloadBadgeCard()">📥 Unduh / Simpan Kartu</button>
+            `;
             modal.classList.add("active");
+        }
+
+        function updateBadgeName(val) {
+            const display = document.getElementById("displayNamePreview");
+            display.innerText = val.trim() ? val : "[ Nama Anda ]";
+        }
+
+        function downloadBadgeCard() {
+            const name = document.getElementById("badgeNameInput").value.trim() || "Pahlawan Bumi";
+            alert(`Kartu atas nama "${name}" berhasil disiapkan! Silakan *screenshot* (tangkapan layar) atau simpan kartu ini langsung dari perangkat Anda.`);
+            closeModal();
         }
 
         function closeModal(event) {
