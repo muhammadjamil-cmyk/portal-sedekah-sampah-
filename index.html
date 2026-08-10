@@ -449,6 +449,41 @@
             gap: 10px;
         }
 
+        /* --- REAL-TIME IMPACT COUNTER STYLES --- */
+        .impact-section {
+            display: flex;
+            justify-content: space-around;
+            padding: 25px 15px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 25px 0;
+            box-shadow: 0 10px 30px rgba(25, 97, 54, 0.08);
+            text-align: center;
+            border: 2px solid rgba(139, 195, 74, 0.3);
+        }
+
+        .impact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .counter {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .counter-label {
+            font-size: 0.8rem;
+            color: #4a5568;
+            margin-top: 5px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
         /* --- KARTU MENU UTAMA (BISA BERGESER & BERAGAM WARNA INTERAKTIF) --- */
         .scroll-container-wrapper {
             position: relative;
@@ -568,6 +603,58 @@
             100% { transform: translateX(6px); }
         }
 
+        /* --- FITUR TAMBAHAN KEJUTAN: KOTAK DOA & LENCANA PAHLAWAN BUMI --- */
+        .interactive-features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .interactive-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--accent-gold);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .interactive-box h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .interactive-box p {
+            font-size: 0.88rem;
+            color: #4a5568;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .interactive-btn {
+            background: linear-gradient(135deg, var(--accent-gold), var(--primary));
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(212,175,55,0.3);
+        }
+
+        .interactive-btn:hover {
+            transform: scale(1.04);
+            filter: brightness(1.1);
+        }
+
         .social-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -652,8 +739,8 @@
             box-shadow: 0 5px 12px rgba(25,97,54,0.3);
         }
 
-        /* --- POPUP MODAL EDUKASI SAMPAH --- */
-        #wasteModal {
+        /* --- POPUP MODAL UMUM --- */
+        #customModal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.6);
@@ -667,7 +754,7 @@
             transition: all 0.3s ease;
         }
 
-        #wasteModal.active { opacity: 1; visibility: visible; }
+        #customModal.active { opacity: 1; visibility: visible; }
 
         .modal-content {
             background: white;
@@ -743,6 +830,7 @@
         @media (max-width: 768px) {
             h1 { font-size: 2.2rem; }
             .social-grid { grid-template-columns: 1fr; }
+            .interactive-features-grid { grid-template-columns: 1fr; }
             .btn-share { grid-column: span 1; }
             .tagline { font-size: 0.75rem; padding: 7px 16px; }
             .eco-masjid { font-size: 1.5rem; }
@@ -754,11 +842,11 @@
 </head>
 <body>
 
-    <!-- POPUP MODAL EDUKASI SAMPAH -->
-    <div id="wasteModal" onclick="closeModal(event)">
+    <!-- POPUP MODAL MULTIFUNGSI -->
+    <div id="customModal" onclick="closeModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <h3 id="modalTitle">Panduan Jenis Sampah</h3>
-            <p id="modalText">Pilih salah satu kategori sampah di halaman utama untuk melihat panduan pembersihannya.</p>
+            <h3 id="modalTitle">Informasi</h3>
+            <p id="modalText">Deskripsi informasi akan muncul di sini.</p>
             <button class="modal-close-btn" onclick="closeModal()">Mengerti</button>
         </div>
     </div>
@@ -837,6 +925,22 @@
                 MASJID
             </div>
         </header>
+
+        <!-- REAL-TIME IMPACT COUNTER SECTION -->
+        <div class="impact-section">
+            <div class="impact-item">
+                <div class="counter" id="trashCount" data-target="1250">0</div>
+                <div class="counter-label">Kg Sampah</div>
+            </div>
+            <div class="impact-item">
+                <div class="counter" id="treeCount" data-target="85">0</div>
+                <div class="counter-label">Pohon Terselamatkan</div>
+            </div>
+            <div class="impact-item">
+                <div class="counter" id="donatorCount" data-target="420">0</div>
+                <div class="counter-label">Donatur Aktif</div>
+            </div>
+        </div>
 
         <!-- KOTAK MENU TINDAKAN CEPAT (BERGESER & BERAGAM WARNA-WANI ESTETIK) -->
         <div class="scroll-container-wrapper">
@@ -925,6 +1029,24 @@
         </div>
         <div class="scroll-hint">👈 Geser ke samping untuk menu lainnya 👉</div>
 
+        <!-- FITUR INTERAKTIF TAMBAHAN (DOA & LENCANA PAHLAWAN BUMI) -->
+        <div class="interactive-features-grid">
+            <div class="interactive-box">
+                <div>
+                    <h3>🤲 Ruang Doa & Harapan</h3>
+                    <p>Kirimkan doa kebaikan untuk keberkahan masjid dan lingkungan kita hari ini.</p>
+                </div>
+                <button class="interactive-btn" onclick="showPrayerBox()">Kirim Doa</button>
+            </div>
+            <div class="interactive-box">
+                <div>
+                    <h3>🌟 Lencana Pahlawan Bumi</h3>
+                    <p>Klaim kartu apresiasi digital eksklusif sebagai wujud kontribusi nyata Anda.</p>
+                </div>
+                <button class="interactive-btn" onclick="showBadgeBox()">Klaim Lencana</button>
+            </div>
+        </div>
+
         <!-- TOMBOL SOSIAL MEDIA & SHARE -->
         <div class="social-grid">
             <a href="https://www.instagram.com/kkn65_lamburkds?igsh=MTF6enE0OW9qMzhrMA==" class="social-btn btn-ig" target="_blank" rel="noopener noreferrer">
@@ -984,7 +1106,7 @@
         }
 
         function showWasteInfo(type) {
-            const modal = document.getElementById("wasteModal");
+            const modal = document.getElementById("customModal");
             const title = document.getElementById("modalTitle");
             const text = document.getElementById("modalText");
 
@@ -1002,8 +1124,28 @@
             modal.classList.add("active");
         }
 
+        function showPrayerBox() {
+            const modal = document.getElementById("customModal");
+            const title = document.getElementById("modalTitle");
+            const text = document.getElementById("modalText");
+
+            title.innerHTML = "🤲 Ruang Doa & Harapan";
+            text.innerHTML = "Jazakallah Khairan! Terima kasih atas niat baik dan doa Anda. Semoga setiap langkah kecil dalam Gerakan Eco Masjid ini mendatangkan keberkahan dan pahala jariyah bagi kita semua. Aamiin Yaa Rabbal 'Alamiin.";
+            modal.classList.add("active");
+        }
+
+        function showBadgeBox() {
+            const modal = document.getElementById("customModal");
+            const title = document.getElementById("modalTitle");
+            const text = document.getElementById("modalText");
+
+            title.innerHTML = "🌟 Status: Pahlawan Bumi";
+            text.innerHTML = "Selamat! Anda terdaftar sebagai pendukung aktif Gerakan Eco Masjid KKN 65 UIN Gus Dur. Mari terus jaga kebersihan lingkungan demi masa depan bumi yang lebih hijau!";
+            modal.classList.add("active");
+        }
+
         function closeModal(event) {
-            const modal = document.getElementById("wasteModal");
+            const modal = document.getElementById("customModal");
             modal.classList.remove("active");
         }
 
@@ -1019,6 +1161,31 @@
                 alert("Tautan website berhasil disalin! Silakan tempel (paste) dan bagikan ke WhatsApp atau media sosial.");
             }
         }
+
+        /* --- SCRIPT REAL-TIME IMPACT COUNTER --- */
+        const counters = document.querySelectorAll('.counter');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const updateCount = (counter) => {
+                        const target = +counter.getAttribute('data-target');
+                        const count = +counter.innerText;
+                        const speed = 200; 
+                        const inc = target / speed;
+
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc);
+                            setTimeout(() => updateCount(counter), 10);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => observer.observe(counter));
     </script>
 </body>
 </html>
