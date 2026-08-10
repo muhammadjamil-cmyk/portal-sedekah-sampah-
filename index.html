@@ -449,7 +449,7 @@
             gap: 10px;
         }
 
-        /* --- REAL-TIME IMPACT COUNTER STYLES --- */
+        /* --- REAL-TIME TRANSPARENCY IMPACT COUNTER STYLES --- */
         .impact-section {
             display: flex;
             justify-content: space-around;
@@ -467,21 +467,29 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .impact-item:hover {
+            transform: scale(1.05);
         }
 
         .counter {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 800;
             color: var(--primary);
             font-family: 'Montserrat', sans-serif;
         }
 
         .counter-label {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #4a5568;
             margin-top: 5px;
             text-transform: uppercase;
             font-weight: 700;
+            text-decoration: underline;
         }
 
         /* --- KARTU MENU UTAMA (BISA BERGESER & BERAGAM WARNA INTERAKTIF) --- */
@@ -603,7 +611,7 @@
             100% { transform: translateX(6px); }
         }
 
-        /* --- FITUR TAMBAHAN KEJUTAN: KOTAK DOA & LENCANA PAHLAWAN BUMI --- */
+        /* --- FITUR TAMBAHAN: KOTAK DOA & LENCANA PAHLAWAN BUMI --- */
         .interactive-features-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -926,20 +934,20 @@
             </div>
         </header>
 
-        <!-- REAL-TIME IMPACT COUNTER SECTION -->
+        <!-- REAL-TIME TRANSPARENCY IMPACT COUNTER SECTION -->
         <div class="impact-section">
-            <div class="impact-item">
+            <a href="https://sedekah-sampah.uingusdur.ac.id/transparansi" target="_blank" rel="noopener noreferrer" class="impact-item">
                 <div class="counter" id="trashCount" data-target="1250">0</div>
-                <div class="counter-label">Kg Sampah</div>
-            </div>
-            <div class="impact-item">
-                <div class="counter" id="treeCount" data-target="85">0</div>
-                <div class="counter-label">Pohon Terselamatkan</div>
-            </div>
-            <div class="impact-item">
-                <div class="counter" id="donatorCount" data-target="420">0</div>
-                <div class="counter-label">Donatur Aktif</div>
-            </div>
+                <div class="counter-label">Kg Sampah (Live Data)</div>
+            </a>
+            <a href="https://sedekah-sampah.uingusdur.ac.id/transparansi" target="_blank" rel="noopener noreferrer" class="impact-item">
+                <div class="counter" id="fundCount" data-target="4850">0</div>
+                <div class="counter-label">Rp. Salur (Ribuan)</div>
+            </a>
+            <a href="https://sedekah-sampah.uingusdur.ac.id/transparansi" target="_blank" rel="noopener noreferrer" class="impact-item">
+                <div class="counter" id="mosqueCount" data-target="15">0</div>
+                <div class="counter-label">Masjid Mitra</div>
+            </a>
         </div>
 
         <!-- KOTAK MENU TINDAKAN CEPAT (BERGESER & BERAGAM WARNA-WANI ESTETIK) -->
@@ -1162,7 +1170,7 @@
             }
         }
 
-        /* --- SCRIPT REAL-TIME IMPACT COUNTER --- */
+        /* --- SCRIPT REAL-TIME TRANSPARENCY COUNTER --- */
         const counters = document.querySelectorAll('.counter');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
