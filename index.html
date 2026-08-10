@@ -449,49 +449,6 @@
             gap: 10px;
         }
 
-        /* --- REAL-TIME IMPACT COUNTER STYLES --- */
-        .impact-section {
-            display: flex;
-            justify-content: space-around;
-            padding: 25px 15px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            margin: 25px 0;
-            box-shadow: 0 10px 30px rgba(25, 97, 54, 0.08);
-            text-align: center;
-            border: 2px solid rgba(139, 195, 74, 0.3);
-        }
-
-        .impact-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .impact-item:hover {
-            transform: scale(1.05);
-        }
-
-        .counter {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary);
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .counter-label {
-            font-size: 0.75rem;
-            color: #4a5568;
-            margin-top: 5px;
-            text-transform: uppercase;
-            font-weight: 700;
-            text-decoration: underline;
-        }
-
         /* --- KARTU MENU UTAMA (BISA BERGESER & BERAGAM WARNA INTERAKTIF) --- */
         .scroll-container-wrapper {
             position: relative;
@@ -611,15 +568,8 @@
             100% { transform: translateX(6px); }
         }
 
-        /* --- FITUR INTERAKTIF (DOA & LENCANA) --- */
-        .interactive-features-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .interactive-box {
+        /* --- FITUR INTERAKTIF (RUANG DOA) --- */
+        .interactive-single-box {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
@@ -629,17 +579,19 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            margin-bottom: 30px;
+            text-align: center;
         }
 
-        .interactive-box h3 {
+        .interactive-single-box h3 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--primary);
             margin-bottom: 8px;
         }
 
-        .interactive-box p {
-            font-size: 0.88rem;
+        .interactive-single-box p {
+            font-size: 0.92rem;
             color: #4a5568;
             margin-bottom: 15px;
             line-height: 1.4;
@@ -649,48 +601,20 @@
             background: linear-gradient(135deg, var(--accent-gold), var(--primary));
             color: white;
             border: none;
-            padding: 10px 16px;
+            padding: 12px 24px;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 12px rgba(212,175,55,0.3);
+            display: inline-block;
+            margin: 0 auto;
         }
 
         .interactive-btn:hover {
             transform: scale(1.04);
             filter: brightness(1.1);
-        }
-
-        /* --- KARTU LENCANA DIGITAL (PREVIEW & DOWNLOAD) --- */
-        .badge-preview-card {
-            background: linear-gradient(135deg, #0d381e, #196136);
-            color: white;
-            border: 3px solid var(--accent-gold);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            margin: 15px 0;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            position: relative;
-        }
-
-        .badge-preview-card h4 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--accent-gold);
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-        }
-
-        .badge-name-display {
-            font-size: 1.3rem;
-            font-weight: 800;
-            margin: 10px 0;
-            color: #ffffff;
-            border-bottom: 2px dashed var(--secondary);
-            padding-bottom: 8px;
-            word-break: break-word;
         }
 
         .input-custom {
@@ -886,7 +810,6 @@
         @media (max-width: 768px) {
             h1 { font-size: 2.2rem; }
             .social-grid { grid-template-columns: 1fr; }
-            .interactive-features-grid { grid-template-columns: 1fr; }
             .btn-share { grid-column: span 1; }
             .tagline { font-size: 0.75rem; padding: 7px 16px; }
             .eco-masjid { font-size: 1.5rem; }
@@ -984,22 +907,6 @@
             </div>
         </header>
 
-        <!-- REAL-TIME TRANSPARENCY IMPACT COUNTER (SINKRON KE HALAMAN TRANSPARANSI) -->
-        <div class="impact-section">
-            <a href="https://sedekah-sampah.uingusdur.ac.id/transparansi" target="_blank" rel="noopener noreferrer" class="impact-item">
-                <div class="counter" id="trashCount" data-target="1250">0</div>
-                <div class="counter-label">Kg Sampah (Live)</div>
-            </a>
-            <a href="https://sedekah-sampah.uingusdur.ac.id/transparansi" target="_blank" rel="noopener noreferrer" class="impact-item">
-                <div class="counter" id="fundCount" data-target="4850">0</div>
-                <div class="counter-label">Rp. Salur (Ribuan)</div>
-            </a>
-            <a href="https://sedekah-sampah.uingusdur.ac.id/transparansi" target="_blank" rel="noopener noreferrer" class="impact-item">
-                <div class="counter" id="mosqueCount" data-target="15">0</div>
-                <div class="counter-label">Masjid Mitra</div>
-            </a>
-        </div>
-
         <!-- KOTAK MENU TINDAKAN CEPAT (BERGESER & BERAGAM WARNA-WANI ESTETIK) -->
         <div class="scroll-container-wrapper">
             <div class="action-scroll-container">
@@ -1087,22 +994,11 @@
         </div>
         <div class="scroll-hint">👈 Geser ke samping untuk menu lainnya 👉</div>
 
-        <!-- FITUR INTERAKTIF: KETIK DOA & EDIT KARTU LENCANA -->
-        <div class="interactive-features-grid">
-            <div class="interactive-box">
-                <div>
-                    <h3>🤲 Ruang Doa & Harapan</h3>
-                    <p>Tuliskan doa kebaikan Anda untuk keberkahan masjid dan lingkungan kita.</p>
-                </div>
-                <button class="interactive-btn" onclick="openPrayerModal()">Ketik & Kirim Doa</button>
-            </div>
-            <div class="interactive-box">
-                <div>
-                    <h3>🌟 Lencana Pahlawan Bumi</h3>
-                    <p>Buat dan unduh kartu apresiasi digital eksklusif dengan nama Anda sendiri.</p>
-                </div>
-                <button class="interactive-btn" onclick="openBadgeModal()">Buat & Unduh Kartu</button>
-            </div>
+        <!-- FITUR INTERAKTIF: RUANG DOA -->
+        <div class="interactive-single-box">
+            <h3>🤲 Ruang Doa & Harapan</h3>
+            <p>Tuliskan doa kebaikan Anda untuk keberkahan masjid dan lingkungan kita.</p>
+            <button class="interactive-btn" onclick="openPrayerModal()">Ketik & Kirim Doa</button>
         </div>
 
         <!-- TOMBOL SOSIAL MEDIA & SHARE -->
@@ -1218,40 +1114,6 @@
             `;
         }
 
-        /* --- FITUR KARTU LENCANA EDIT & DOWNLOAD --- */
-        function openBadgeModal() {
-            const modal = document.getElementById("customModal");
-            const title = document.getElementById("modalTitle");
-            const body = document.getElementById("modalBody");
-
-            title.innerHTML = "🌟 Kartu Pahlawan Bumi";
-            body.innerHTML = `
-                <p>Masukkan nama Anda untuk mencetak kartu lencana digital:</p>
-                <input type="text" id="badgeNameInput" class="input-custom" placeholder="Ketik Nama Lengkap Anda..." oninput="updateBadgeName(this.value)">
-                
-                <div class="badge-preview-card" id="printableCard">
-                    <h4>ECO MASJID - KKN 65 UIN GUS DUR</h4>
-                    <p style="font-size: 0.8rem; opacity: 0.8; margin-top: 2px;">Sertifikat Apresiasi Kontributor</p>
-                    <div class="badge-name-display" id="displayNamePreview">[ Nama Anda ]</div>
-                    <p style="font-size: 0.85rem;">Terverifikasi sebagai <b>Pahlawan Bumi & Penjaga Kebersihan Masjid</b></p>
-                </div>
-
-                <button class="interactive-btn" style="width: 100%; margin-top: 5px; padding: 12px;" onclick="downloadBadgeCard()">📥 Unduh / Simpan Kartu</button>
-            `;
-            modal.classList.add("active");
-        }
-
-        function updateBadgeName(val) {
-            const display = document.getElementById("displayNamePreview");
-            display.innerText = val.trim() ? val : "[ Nama Anda ]";
-        }
-
-        function downloadBadgeCard() {
-            const name = document.getElementById("badgeNameInput").value.trim() || "Pahlawan Bumi";
-            alert(`Kartu atas nama "${name}" berhasil disiapkan! Silakan *screenshot* (tangkapan layar) atau simpan kartu ini langsung dari perangkat Anda.`);
-            closeModal();
-        }
-
         function closeModal(event) {
             const modal = document.getElementById("customModal");
             modal.classList.remove("active");
@@ -1269,31 +1131,6 @@
                 alert("Tautan website berhasil disalin! Silakan tempel (paste) dan bagikan ke WhatsApp atau media sosial.");
             }
         }
-
-        /* --- SCRIPT REAL-TIME TRANSPARENCY COUNTER --- */
-        const counters = document.querySelectorAll('.counter');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const updateCount = (counter) => {
-                        const target = +counter.getAttribute('data-target');
-                        const count = +counter.innerText;
-                        const speed = 200; 
-                        const inc = target / speed;
-
-                        if (count < target) {
-                            counter.innerText = Math.ceil(count + inc);
-                            setTimeout(() => updateCount(counter), 10);
-                        } else {
-                            counter.innerText = target;
-                        }
-                    };
-                    updateCount(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        counters.forEach(counter => observer.observe(counter));
     </script>
 </body>
 </html>
